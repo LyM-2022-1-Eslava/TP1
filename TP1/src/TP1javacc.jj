@@ -1,0 +1,58 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = true;}PARSER_BEGIN(LOGO)
+public class LOGO{  public static void main(String args []) throws ParseException  {    LOGO parser = new LOGO(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter a LOGO program :");      try      {        switch (LOGO.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        LOGO.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(LOGO)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */
+{
+  < FORWARD : "FORWARD" | "FD" >
+| < RIGHT : "RIGHT"|"RT" >
+| < LEFT : "LEFT"|"LT" >
+| < REPEAT : "REPEAT" >
+| < PENUP : "PENUP" >
+| < PENDOWN : "PENDOWN" >
+}
+
+TOKEN :
+{
+  < CONSTANT : (< DIGIT >)+ >
+| < #DIGIT : [ "0"-"9" ] >
+}
+
+int one_line() :
+{}
+{
+  ins() "."
+  {
+    return 0;
+  }
+| "."
+  {
+    return 1;
+  }
+}
+
+ void ins() :
+{}
+{
+  (
+    forrile()
+	|(< REPEAT > < CONSTANT > "[" ins()+ "]")
+	|(pen()) 
+  )*
+}
+
+void forrile() :
+{}
+{
+  < FORWARD > < CONSTANT >
+| < RIGHT > < CONSTANT >
+| < LEFT > < CONSTANT >
+
+}
+
+void pen() :
+{}
+{
+  < PENUP >
+| < PENDOWN >
+
+}
