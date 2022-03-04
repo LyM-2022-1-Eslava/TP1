@@ -17,7 +17,7 @@ TOKEN :
 | < #DIGIT : [ "0"-"9" ] >
 }
 
-int one_line() :
+int one_line() :/* Los comandos terminan en "." */
 {}
 {
   ins() "."
@@ -33,14 +33,14 @@ int one_line() :
  void ins() :
 {}
 {
-  (
-    forrile()
-	|(< REPEAT > < CONSTANT > "[" ins()+ "]")
+  ( 
+    forRiLe()
+	|(< REPEAT > < CONSTANT > "[" (ins())+ "]")
 	|(pen()) 
-  )*
+  )
 }
 
-void forrile() :
+void forRiLe() : /* Los 3 son de la misma estructura */
 {}
 {
   < FORWARD > < CONSTANT >
@@ -49,7 +49,7 @@ void forrile() :
 
 }
 
-void pen() :
+void pen() : /* Los 2 son de la misma estructura */
 {}
 {
   < PENUP >
