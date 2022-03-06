@@ -17,10 +17,10 @@ TOKEN :
 | < #DIGIT : [ "0"-"9" ] >
 }
 
-int one_line() :/* Los comandos terminan en "." */
+int one_line() :    /* Los comandos terminan en punto(.) */
 {}
 {
-  ins() "."
+  tp1() "."
   {
     return 0;
   }
@@ -28,6 +28,14 @@ int one_line() :/* Los comandos terminan en "." */
   {
     return 1;
   }
+}
+
+void tp1() :
+{}
+{
+  ( 
+    (ins())* 
+  )
 }
 
  void ins() :
@@ -40,7 +48,8 @@ int one_line() :/* Los comandos terminan en "." */
   )
 }
 
-void forRiLe() : /* Los 3 son de la misma estructura */
+
+void forRiLe() :      /* Los 3 son de la misma estructura */
 {}
 {
   < FORWARD > < CONSTANT >
@@ -49,7 +58,7 @@ void forRiLe() : /* Los 3 son de la misma estructura */
 
 }
 
-void pen() : /* Los 2 son de la misma estructura */
+void pen() :       /* Los 2 son de la misma estructura */
 {}
 {
   < PENUP >
